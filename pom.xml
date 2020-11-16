@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example</groupId>
+  <artifactId>wf-sb-3</artifactId>
+  <version>${revision}</version>
+
+  <packaging>war</packaging>
+
+  <properties>
+
+    <!--region General-->
+    <java.version>15</java.version>
+    <revision>0.0.1-SNAPSHOT</revision>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <!--endregion-->
+
+    <!--region BOMs -->
+    <spring-boot.version>2.3.5.RELEASE</spring-boot.version>
+    <!--endregion-->
+
+    <!--region Libs -->
+    <tomcat.version>9.0.39</tomcat.version>
+    <javaee-api.version>8.0.1</javaee-api.version>
+    <!--endregion-->
+
+    <!--region Plugins-->
+    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    <maven.compiler.release>${java.version}</maven.compiler.release>
+    <maven.compiler.parameters>true</maven.compiler.parameters>
+    <maven.compiler.forceJavacCompilerUse>true</maven.compiler.forceJavacCompilerUse>
+    <!--endregion-->
+
+    <maven-war-plugin.version>3.3.1</maven-war-plugin.version>
+  </properties>
+
+  <dependencies>
+
+    <!--region Tomcat-->
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-catalina</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-jasper</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+    </dependency>
+    <!--endregion-->
+
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!--region Tomcat-->
+      <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-catalina</artifactId>
+        <version>${tomcat.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-jasper</artifactId>
+        <version>${tomcat.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax</groupId>
+        <artifactId>javaee-api</artifactId>
+        <version>${javaee-api.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <!--endregion-->
+
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+
+    <defaultGoal>verify</defaultGoal>
+
+    <pluginManagement>
+      <plugins>
+
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler-plugin.version}</version>
+          <configuration>
+            <compilerArgs>
+              <arg>-parameters</arg>
+              <!--<arg>&#45;&#45;enable-preview</arg>-->
+              <!--<arg>-Xlint:preview</arg>-->
+            </compilerArgs>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>${maven-war-plugin.version}</version>
+        </plugin>
+
+      </plugins>
+    </pluginManagement>
+
+  </build>
+</project>
